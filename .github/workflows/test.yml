@@ -4,7 +4,7 @@ jobs:
    build-the-project:
       runs-on: ubuntu-latest
       steps:
-         - run: echo "Welcome to next_js_blog"
-         - run: echo "what do next?"
+         - uses: actions/checkout@v2
+         - run: tree
  
  
