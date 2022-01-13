@@ -1,7 +1,25 @@
 import Link from 'next/link'
 import React from 'react'
+import {auth,signInWithEmailAndPassword} from "../src/Firebase/firebase.config"
+import { useState } from 'react';
 
 export default function Login() {
+
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
+
+
+
+    const handleLogin=async(e)=>{
+        e.preventDefault();
+        try {
+            await signInWithEmailAndPassword(auth,email,password)
+            
+        } catch (error) {
+            alert("error occurred try again!")
+        }
+
+    }
     return (
         <div>
             <header className="bg-gray-100 shadow-2xl p-4">
@@ -13,17 +31,17 @@ export default function Login() {
                 <p className='text-xl'>Read, write blogs from your faviorte authors</p>
             </div>
             <div>
-                <form className='sm:w-3/4 mx-auto bg-gray-200 shadow-2xl rounded-md space-y-3 px-8 py-8'>
+                <form className='sm:w-3/4 mx-auto bg-gray-200 shadow-2xl rounded-2xl space-y-3 px-8 py-8'>
                     <h3 className='text-center text-2xl font-medium'>Login</h3>
                     <div className='flex flex-col w-5/6'>
                         <label className='py-1'>Email</label>
-                        <input className='p-3 rounded-md' type="email" placeholder='' required />
+                        <input className='p-3 rounded-md' type="email" placeholder='' required onChange={(e)=>setEmail(e.target.value.trim())} />
                     </div>
                     <div className='flex flex-col w-5/6'>
                         <label className='py-1'>Password</label>
-                        <input className='p-3 rounded-md' type="password" placeholder='' required />
+                        <input className='p-3 rounded-md' type="password" placeholder='' required onChange={(e)=>setPassword(e.target.value.trim())} />
                     </div>
-                    <button className="bg-cyan-500 text-white font-medium rounded-md shadow-xl px-6 py-3">Login</button>
+                    <button type="submit" className="bg-cyan-500 text-white font-medium rounded-md shadow-xl px-6 py-3" onClick={handleLogin}>Login</button>
                     <div className='flex space-x-2'>
                         <p>Not a registered user ? </p>
                         <Link href="/signup"><a className="underline">signup</a></Link>

@@ -1,0 +1,10 @@
+name: my first github action
+on: [push]
+jobs:
+   build-the-project:
+      runs-on: ubuntu-latest
+      steps:
+         -run: echo "Welcome to next_js_blog"
+         -run: echo "what do next?"
+ 
+ 
